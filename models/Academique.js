@@ -5,6 +5,17 @@ class AcadModel extends CommandeModel{
         super();
     }
 
+    getAllCharges(id_promotion){
+        const sql = `SELECT ch.*, m.designation AS 'cours', m.credit, u.designation AS 'unite', CONCAT (g.designation, '. ', t.nom, ' ', t.post_nom) AS 'titulaire', t.matricule
+                FROM charge_horaire ch
+                INNER JOIN matiere m ON m.id = ch.id_matiere
+                INNER JOIN unite u ON u.id = m.id_unite
+                INNER JOIN agent t ON t.id = ch.id_titulaire
+                INNER JOIN grade g ON g.id = t.id_grade
+                WHERE u.id_promotion = ?`;
+        return this.query(sql, [id_promotion]);
+    }
+
     getAllTravaux(id_charge){
         return this.query('SELECT * FROM travail WHERE id_charge = ?', [id_charge])
     }

@@ -7,5 +7,5 @@ module.exports = {
     Etudiant: new RechargeModel(),
     Academique: new AcadModel(),
     Aministratif: new AdminModel(),
-    Recharge: new RechercheModel()
+    Recherche: new RechercheModel()
 };

@@ -3,7 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const database = require('./config/database');
 const { MemcachedClient } = require('./models/model');
-const { Etudiant } = require('./models'); // Import models if needed
+const { Etudiant } = require('./models');
+const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use('/api', routes);
 
 // Test route
 app.get('/hello', (req, res) => {

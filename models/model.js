@@ -82,15 +82,15 @@ class Model {
     }
 
     async getFromCache(key) {
-        return this.cache.getFromCache(key);
+        return await this.cache.getFromCache(key);
     }
 
     async setInCache(key, value) {
-        return this.cache.setInCache(key, value);
+        return await this.cache.setInCache(key, value);
     }
 
     async deleteFromCache(key) {
-        return this.cache.deleteFromCache(key);
+        return await this.cache.deleteFromCache(key);
     }
 }
 

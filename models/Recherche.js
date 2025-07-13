@@ -161,6 +161,21 @@ class RechercheModel extends CommandeModel{
             };
         }
     }
+    
+    async updatePlagiat(id, value) {
+        try {
+            return await this.query('UPDATE commande_plagiat SET url_document = ? WHERE id = ?', [value, id]);
+
+        } catch (error) {
+            return {
+                success: false,
+                message: error?.message,
+                data: null
+            }
+            
+        }
+
+    }
 
 }
 

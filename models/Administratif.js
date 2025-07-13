@@ -162,6 +162,28 @@ class AdminModel extends CommandeModel{
         }
     }
 
+    // Soumettre un dossier
+    async updateDossier(id, url) {
+        try {
+            const result = await this.query('UPDATE dossier SET url = ? WHERE id = ?', [url, id]);
+            if (result.affectedRows > 0) {
+                return {
+                    success: true,
+                    message: "Dossier submitted successfully",
+                    data: result
+                };
+            } else {
+                throw new Error("Dossier not found or already submitted");
+            }
+        } catch (error) {
+            return {
+                success: false,
+                message: error.message,
+                data: null
+            };
+        }
+    }
+
 }
 
 module.exports = AdminModel
