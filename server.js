@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const database = require('./config/database');
 const { MemcachedClient } = require('./models/model');
+const { Etudiant } = require('./models'); // Import models if needed
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -64,10 +65,10 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
     try {
         // Test database connection before starting server
-        const db = database.getPool();
-        await db.query('SELECT 1');
+        const etudiants = await Etudiant.getAllEtudiants();
         console.log('✅ Database connection successful');
-
+        console.log(`Found ${etudiants.data.length} etudiants in the database`);
+        
         // Test cache connection
         const cache = MemcachedClient;
         await cache.setInCache('startup_test', 'ok');
